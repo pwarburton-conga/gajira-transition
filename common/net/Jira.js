@@ -40,8 +40,12 @@ class Jira {
   }
 
   async transitionIssue (issueId, data) {
+    const destinationPath = `/rest/api/3/issue/${issueId}/transitions`;
+    console.log(`Sending to ${destinationPath}`);
+    console.log("body: ");
+    console.log(JSON.stringify(data));
     return this.fetch('transitionIssue', {
-      pathname: `/rest/api/3/issue/${issueId}/transitions`,
+      pathname: destinationPath,
     }, {
       method: 'POST',
       body: data,
