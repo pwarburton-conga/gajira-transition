@@ -40,7 +40,7 @@ class Jira {
   }
 
   async transitionIssue (issueId, data) {
-    const destinationPath = `/rest/api/3/issue/${issueId}/transitions`;
+    const destinationPath = `/rest/api/2/issue/${issueId}/transitions`;
     console.log(`Sending to ${destinationPath}`);
     console.log("body: ");
     console.log(JSON.stringify(data));
@@ -65,6 +65,8 @@ class Jira {
       method = 'GET'
     }
 
+    console.log("Using method: " + method);
+    
     if (headers['Content-Type'] === undefined) {
       headers['Content-Type'] = 'application/json'
     }
@@ -90,6 +92,7 @@ class Jira {
 
     try {
       await client(state, `${serviceName}:${apiMethodName}`)
+      console.log("returned state", state);
     } catch (error) {
       const fields = {
         originError: error,
